@@ -28,8 +28,10 @@ class DFplayer {
   uint8_t DF_Buffer[10] =    {0x7E, 0xFF, 0x06, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0xEF}; // send Data to DF Player
   uint8_t   _volume;
   uint16_t  _track;
-  unsigned long time_to_send;
-  bool played;
+  unsigned long time_to_send_volume;
+  bool volume_sent;
+  unsigned long time_to_send_play;
+  bool play_sent;
  
   void _DF_calc_crc(){
 	uint16_t DF_crc = 1 + (0xFFFF-(DF_Buffer[1] + DF_Buffer[2] + DF_Buffer[3] +  DF_Buffer[4] + DF_Buffer[5] + DF_Buffer[6]));		
@@ -38,9 +40,11 @@ class DFplayer {
   }
   
   void _DF_send(){
+    //Serial.begin(9600);
     for (int i = 0; i <= 9 ; i++){ 
       Serial.write(DF_Buffer[i]);
-    }	  
+    }	
+    //Serial.begin(115200);  
   }	  
   
 //.....................................................................................................
@@ -57,16 +61,25 @@ class DFplayer {
   void play_vol(uint16_t track = 0, uint8_t vol = 15){
     _volume = vol;
     _track = track;
-    time_to_send = millis() + 100;  // min. 100ms Verzögerung zwischen zwei Befehlen
-    volume(_volume);
-    played = false;
+    time_to_send_volume = millis() + 100;   // min. 100ms Verzögerung zwischen zwei Befehlen
+    time_to_send_play = millis() + 200;     // min. 100ms Verzögerung zwischen zwei Befehlen
+    Serial.begin(9600);
+    volume_sent = false;
+    play_sent = false;
   }	
 
   void run(){
-    if(!played && millis() > time_to_send){     
-      play(_track);
-      played = true;  
+    if(!volume_sent && millis() > time_to_send_volume){     
+      volume(_volume);
+      volume_sent = true;  
     }  
+
+    if(!play_sent && millis() > time_to_send_play){     
+      play(_track);
+      play_sent = true;  
+      Serial.begin(115200);
+    }  
+
   }
 
   void volume(uint8_t volume = 15){
