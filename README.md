@@ -19,17 +19,24 @@ https://garrysblog.com/2022/06/12/mp3-dfplayer-notes-clones-noise-speakers-wrong
 
 ## Vorbereitung des Programmes
 
-Die Datei xxxxxx.h wird in das Verzeichnis des Programmes kopiert.
+Die Datei DF_Player.h wird in das Verzeichnis des Programmes kopiert.
 In unserem Programm wird auf die Datei verwiesen und eine Instanz erzeugt:
 
 ```
-#include "WS2811_Lib_for_ESP32.h"
+#include "DF_Player.h"
+DFplayer mp3; 
 
-#define LEDS_COUNT     24
-#define LEDS_PIN	2
-#define CHANNEL		0
+void setup() {
 
-ESP32_WS2811 strip = ESP32_WS2811(LEDS_COUNT, LEDS_PIN, CHANNEL, TYPE_GRB);
+  Serial.begin(9600);
+
+  mp3.volume(19);
+  delay(100);
+  mp3.play(999);
+}
+
+void loop() {
+}
 ```
 
 
@@ -41,26 +48,17 @@ Im ersten Beispiel ist die Baudrate fest auf 9600 Baud eingestellt.
 Der DF Player benötigt nach jedem Befehl eine Zeit von etwa 100ms, bis der wieder bereit ist. Das wird hier mit dem delay(100) Befehl erreicht.
 
 ```
-#include "WS2811_Lib_for_ESP32.h"
-
-#define LEDS_COUNT     24
-#define LEDS_PIN	2
-#define CHANNEL		0
-
-ESP32_WS2811 strip = ESP32_WS2811(LEDS_COUNT, LEDS_PIN, CHANNEL, TYPE_GRB);
+#include "DF_Player.h"
+DFplayer mp3; 
 
 void setup() {
- 
-  strip.begin();
-  strip.show();			
-  delay(5000);
 
-  strip.set_pixel(0, 50);  						// index: 0 green  1 red  2 blue, brightness
-  strip.show();
+  Serial.begin(9600);
+  mp3.play_vol(999, 20);
 }
 
 void loop() {
- 
+  mp3.run();
 }
 ```
 
