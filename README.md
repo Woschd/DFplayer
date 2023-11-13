@@ -25,18 +25,6 @@ In unserem Programm wird auf die Datei verwiesen und eine Instanz erzeugt:
 ```
 #include "DF_Player.h"
 DFplayer mp3; 
-
-void setup() {
-
-  Serial.begin(9600);
-
-  mp3.volume(19);
-  delay(100);
-  mp3.play(999);
-}
-
-void loop() {
-}
 ```
 
 
@@ -54,11 +42,13 @@ DFplayer mp3;
 void setup() {
 
   Serial.begin(9600);
-  mp3.play_vol(999, 20);
+
+  mp3.volume(19);
+  delay(100);
+  mp3.play(999);
 }
 
 void loop() {
-  mp3.run();
 }
 ```
 
@@ -66,6 +56,19 @@ void loop() {
  Im zweiten Beispiel wechselt die Library nach jedem Befehl zu 115200 Baud um eine Debugausgabe mit höherer Geschwindigkeit zu ermöglichen.
 Für die Wartezeiten nach einem Geschwindigkeitswechsel und einem Soundbefehl sorgt die Library.  
 
+```
+#include "DF_Player.h"
+DFplayer mp3; 
+
+void setup() {
+
+  mp3.play_vol(999, 20);
+}
+
+void loop() {
+  mp3.run();
+}
+```
 
 ## Die Funktionen
 
