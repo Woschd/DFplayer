@@ -14,7 +14,7 @@ Der DF Player wird mit 5V und Masse angeschlossen. Vom TX Ausgang des Prozessors
 
 [Hier geht es zu den Details.](https://github.com/Woschd/Multi-ESP/blob/main/docs/DF_Player.md)  
 
-Varianten:
+Lesenswert:  
 https://garrysblog.com/2022/06/12/mp3-dfplayer-notes-clones-noise-speakers-wrong-file-plays-and-no-library/
 
 ## Vorbereitung des Programmes
