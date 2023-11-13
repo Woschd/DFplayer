@@ -40,7 +40,6 @@ Der DF Player benötigt nach jedem Befehl eine Zeit von etwa 100ms, bis der wied
 DFplayer mp3; 
 
 void setup() {
-
   Serial.begin(9600);
 
   mp3.volume(19);
@@ -61,7 +60,6 @@ Für die Wartezeiten nach einem Geschwindigkeitswechsel und einem Soundbefehl so
 DFplayer mp3; 
 
 void setup() {
-
   mp3.play_vol(999, 20);
 }
 
