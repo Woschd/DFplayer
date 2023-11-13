@@ -72,7 +72,7 @@ void loop() {
 
 
 ```
-mp3.play();
+mp3.play(uint16_t track);
 ```
 Ein Titel entsprechend der Nummerierung auf der SD Karte wird abgespielt.  
 Führende Nullen werden weg gelassen, die größte mögliche Titelnummer ist XXXX (!!! keine Ahnung, größer 1000)
@@ -80,7 +80,7 @@ Ist die Anzahl der Dateien auf der SD Kart sehr groß, macht sich das mit einer 
 
 ---
 ```
-mp3.volume();
+mp3.volume(uint8_t volume);
 ```
 Die Lautstärke kann mit Werten zwischen 0 und 30 gesteuert werden. Wird der Parameter weg gelassen, gilt der Wert 15.
 
@@ -92,7 +92,7 @@ Während der DF Player eine Sounddatei abspielt, kann mit stop() abgebrochen wer
 
 ---
 ```
-mp3.play_vol();
+mp3.play_vol(uint16_t track, uint8_t volume);
 ```
 In einer Funktion sind volume() und play() vereint.  
 Die Baudrate wird für die Befehle des DF Players auf 9600 gestellt und anschließend wieder auf 115200.  
@@ -104,7 +104,7 @@ Die nötigen Pausen zwischen den Befehlen werden hier vorbereitet.
 mp3.run();
 ```
 Es muss sichergestellt sein, dass die loop() sehr regelmäßig aufgerufen wird.  
-run() wird innerhalb von loop() plaziert und sorgt dafür, dass die Befehle an den DF in zeitlich passender Reihenfolge ausgegeben werden.  
+run() wird innerhalb von loop() platziert und sorgt dafür, dass die Befehle an den DF in zeitlich passender Reihenfolge ausgegeben werden.  
 
 
 
