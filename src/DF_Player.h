@@ -32,6 +32,8 @@ class DFplayer {
   bool volume_sent;
   unsigned long time_to_send_play;
   bool play_sent;
+  unsigned long time_to_send_baud;
+  bool baud_sent;
  
   void _DF_calc_crc(){
 	uint16_t DF_crc = 1 + (0xFFFF-(DF_Buffer[1] + DF_Buffer[2] + DF_Buffer[3] +  DF_Buffer[4] + DF_Buffer[5] + DF_Buffer[6]));		
@@ -43,8 +45,7 @@ class DFplayer {
     //Serial.begin(9600);
     for (int i = 0; i <= 9 ; i++){ 
       Serial.write(DF_Buffer[i]);
-    }	
-    //Serial.begin(115200);  
+    }	 
   }	  
   
 //.....................................................................................................
@@ -59,13 +60,15 @@ class DFplayer {
   }	 
 
   void play_vol(uint16_t track = 0, uint8_t vol = 15){
+    Serial.begin(9600);
     _volume = vol;
     _track = track;
     time_to_send_volume = millis() + 100;   // min. 100ms Verzögerung zwischen zwei Befehlen
-    time_to_send_play = millis() + 200;     // min. 100ms Verzögerung zwischen zwei Befehlen
-    Serial.begin(9600);
+    time_to_send_play = millis() + 200;
+    time_to_send_baud = millis() + 300;
     volume_sent = false;
     play_sent = false;
+    baud_sent = false;
   }	
 
   void run(){
@@ -77,8 +80,12 @@ class DFplayer {
     if(!play_sent && millis() > time_to_send_play){     
       play(_track);
       play_sent = true;  
-      Serial.begin(115200);
     }  
+
+    if(!baud_sent && millis() > time_to_send_baud){     
+      baud_sent = true;  
+      Serial.begin(115200);
+    }      
 
   }
 
