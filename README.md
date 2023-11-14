@@ -3,7 +3,8 @@
 ## Beschreibung
 
 Die Library dient zum Ansteuern eines DF Players. Der Funktionsumfang beschränkt sich auf das Abspielen von Sounddateien, Anhalten der Wiedergabe und die Einstellung der Lautstärke.  
-Wer mehr braucht, ist hier besser bedient.  
+Wer mehr braucht, ist [hier](https://github.com/Makuna/DFMiniMp3) besser bedient. 
+Jozsef, vielleicht ist es was für Dich?
 
 Eines der Entwicklungsziele war, den TX Ausgang des Prozessors auch für die Debugausgabe bei 115200 Baud nutzen zu können. Die Umschaltung zwischen 9600 Baud für den DF Player und 115200 zur Debug Ausgabe erledigt die Library.  
 
